@@ -1,10 +1,9 @@
-import React from 'react';
-import { v4 as uuid } from 'uuid';
+import React, { memo } from 'react';
 
 import Button from './Button';
 
 const SubHeader = ({ className, style, subTitle, description, buttonText, handleClick }) => {
-  console.log(`SubHeader ${uuid()}`)
+  console.log(`SubHeader`)
 
   return (
     <div className={className} style={style}>
@@ -15,4 +14,4 @@ const SubHeader = ({ className, style, subTitle, description, buttonText, handle
   )
 }
 
-export default SubHeader
+export default memo(SubHeader)

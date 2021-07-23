@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { v4 as uuid } from 'uuid';
 
 const Header = ({ className, style, title, buttonText, handleClick }) => {
@@ -14,4 +14,4 @@ const Header = ({ className, style, title, buttonText, handleClick }) => {
   )
 }
 
-export default Header
+export default memo(Header)

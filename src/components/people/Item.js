@@ -1,15 +1,21 @@
-import React from 'react';
-import { v4 as uuid } from 'uuid';
+import React, { useMemo, memo } from 'react';
 import Button from '../common/Button';
 
 const Item = ({ className, style, person, handleClick }) => {
-  console.log(`Item ${uuid()}`)
+  console.log(`Item ${person.name}`)
+
+  console.log('person isHired', person.isHired)
+  const dataAttributes = useMemo(() => ({
+    'data-person-id': person.id,
+  }), [person.id])
+
   return (
     <li className={className} style={{ display: 'flex', ...style}}>
       <div style={{ display: 'inline-block', padding: '0 16px 0 0' }}>
         <Button 
-          text={person.isHired ? 'Fire' : 'Hire'} 
-          handleClick={() => handleClick(person.id, !person.isHired)}
+          text={person.isHired ? 'Fire' : 'Hire'}
+          dataAttributes={dataAttributes}
+          handleClick={handleClick}
         />
       </div>
       <div style={{
@@ -23,4 +29,4 @@ const Item = ({ className, style, person, handleClick }) => {
   )
 }
 
-export default Item
+export default memo(Item)

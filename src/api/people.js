@@ -11,13 +11,13 @@ class People {
     return this.people
   }
 
-  setIsHired(id, isHiredStatus) {
+  toggleIsHired(id) {
     try {
       this.people = this.people.map(person => {
         if (person.id === id) {
           return {
             ...person,
-            isHired: isHiredStatus,
+            isHired: !person.isHired,
           }
         }
         

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, memo } from 'react';
 import { v4 as uuid } from 'uuid';
 
 
@@ -18,11 +18,12 @@ const PeopleLayout = ({
   handleResetTransactions,
 }) => {
   console.log(`PeopleLayout ${uuid()}`)
+  const { current: headerStyle }= useRef({ color: 'blue', textAlign: 'center' })
   return (
   <div className={className} style={style}>
     <Header
       className="header"
-      style={{ color: 'blue', textAlign: 'center' }}
+      style={headerStyle}
       title="Professionals is the key to success"
       buttonText="Fire All"
       handleClick={handleFireAll}
@@ -51,4 +52,4 @@ const PeopleLayout = ({
   )
 }
 
-export default PeopleLayout
+export default memo(PeopleLayout)

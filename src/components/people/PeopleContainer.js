@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
 import api from '../../api/people';
 import PeopleLayout from './PeopleLayout';
@@ -18,23 +18,28 @@ const PeopleContainer = ({ number, handleItemClick }) => {
     fetchPeople()
   }, [])
 
-  const handleHirePerson = (id, isHiredStatus) => {
-    api.setIsHired(id, isHiredStatus)
-    setTransactions(transactions + 1)
+  const { current: handleHirePerson } = useRef(e => {
+    const { personId } = e.currentTarget.dataset;
+    api.toggleIsHired(+personId)
+    setTransactions(prevTransactions => prevTransactions + 1)
     fetchPeople()
-  }
+  })
 
-  const handleHireAll = () => {
+  const { current: handleHireAll } = useRef(() => {
     api.setIsHiredAll()
-    setTransactions(transactions + 1)
+    setTransactions(prevTransactions => prevTransactions + 1)
     fetchPeople()
-  }
+  })
 
-  const handleFireAll = () => {
+  const { current: handleFireAll } = useRef(() => {
     api.setFireAll()
-    setTransactions(transactions + 1)
+    setTransactions(prevTransactions => prevTransactions + 1)
     fetchPeople()
-  }
+  })
+
+  const { current: handleResetTransaction } = useRef(() => {
+    setTransactions(0)
+  })
 
   return (
     <PeopleLayout
@@ -44,7 +49,7 @@ const PeopleContainer = ({ number, handleItemClick }) => {
       handleHireAll={handleHireAll}
       handleFireAll={handleFireAll}
       handleHirePerson={handleHirePerson}
-      handleResetTransactions={() => setTransactions(0)}
+      handleResetTransactions={handleResetTransaction}
     />
   )
 }

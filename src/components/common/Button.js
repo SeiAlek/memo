@@ -1,8 +1,7 @@
-import React from 'react';
-import { v4 as uuid } from 'uuid';
+import React, { memo } from 'react';
 
-const Button = ({ className, style, text, handleClick }) => {
-  console.log(`Button ${uuid()}`)
+const Button = ({ className, style, text, dataAttributes = {}, handleClick }) => {
+  console.log(`Button ${text}`)
 
   return (
     <button
@@ -10,10 +9,11 @@ const Button = ({ className, style, text, handleClick }) => {
       className={className}
       style={style} 
       onClick={handleClick}
+      { ...dataAttributes }
     >
       {text}
     </button>
   )
 }
 
-export default Button
+export default memo(Button)

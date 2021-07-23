@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { v4 as uuid } from 'uuid';
 
-const Divider = ({ children, className, style, company, year }) => {
+const Divider = () => {
   console.log(`Divider ${uuid()}`)
 
 
@@ -10,4 +10,4 @@ const Divider = ({ children, className, style, company, year }) => {
   )
 }
 
-export default Divider
+export default memo(Divider)
